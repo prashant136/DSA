@@ -21,5 +21,32 @@
     // 👉 all unique character
     function lengthOfLongestSubstring(s) {
     
-    };
+};
+    
+
+// 🎲 👑 ------ slidig window and set -------
+function longestSubstringWithoutRepeating(str) {
+   let i = 0;
+   let j = 0;
+   let ans = 0;
+   let set = new Set();
+
+   while (j < str.length) {
+       // If the character is not in the set, add it and expand the window
+      if (!set.has(str[j])) {
+         set.add(str[j]);
+         ans = Math.max(ans, j - i + 1);
+         j++;
+      } else {
+         // If the character is in the set, remove the first character and shrink the window
+         set.delete(str[i])
+         i++;
+      }
+   }
+   return ans;
+}
+const inputString = "abcabcbb";
+console.log(longestSubstringWithoutRepeating(inputString));
+
+
 
