@@ -139,3 +139,5 @@ dll.deleteLast();
 dll.deleteAt(2);
 
 dll.print()
+
+// never temper the head pointer in Linkedlist. 
