@@ -15,6 +15,9 @@
     Output: -1
  */
 
+//     steps: identify the sorted part & unsorted part
+//     check whether target is in sorted part or unsorted part
+    
 // 👉 https://www.youtube.com/watch?v=5qGrJbHhqFs&list=PLgUwDviBIf0pMFMWuuvDNMAkoQFi-h0ZF&index=5
 // function search(arr, target) {
 //     let left = 0;

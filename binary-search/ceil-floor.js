@@ -16,7 +16,7 @@ const ceiling = (arr, target) => {
     console.log("start", start);
     return arr[start];
 };
-
+ 
 // end pointer -> floor of number
 const floor = (arr, target) => {
     let start = 0;
