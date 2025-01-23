@@ -32,5 +32,3 @@ console.log(balancedParantheses(str));
 
 // let arr = ["(", ")", "[", "]", "{", "}"]
 // console.log(balancedParantheses(arr));
-
-
