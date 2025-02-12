@@ -9,14 +9,15 @@ class HeightOfTree<T extends number> {
 
         queue.push(root);
         while (queue.length) {
-            let size = queue.length;
+            let size = queue.length;    // this size is for level detection. when size is zero means we completed a level. 
             while (size > 0) {
                 let node = queue.shift();
                 size--;
                 if (node && node.left) queue.push(node.left);
                 if (node && node.right) queue.push(node.right);
             }
-            if (queue.length) level++;
+            // if size is ZERO -> we have crossed a complete level...
+            if (queue.length) level++; 
         }
         return level + 1;
     }
@@ -41,4 +42,4 @@ root.right.right = new TreeNode(7);
 
 const obj = new HeightOfTree();
 console.log(obj.maxDepthBFS(root));
-console.log(obj.maxDepthDFS(root));
+// console.log(obj.maxDepthDFS(root));

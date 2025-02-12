@@ -28,7 +28,6 @@ const totalNodesBinaryTree = <T extends number>(root: TreeNode<T>): number => {
 }
 
 // Design an algorithm that runs better than O(n).
-// in a complete binary tree - total nodes = (2^n-1), n is level
 const findLeftHeight = <T extends number>(root: TreeNode<T>): number => {
     let count = 1;
     while(root.left) {
@@ -45,6 +44,7 @@ const findRightHeight = <T extends number>(root: TreeNode<T>): number => {
     }
     return count;
 } 
+// 🍀 In a complete binary tree - total nodes = (2^n-1), n is level
 const totalNodesTree = <T extends number>(root: TreeNode<T>): number => {
     if(!root) return 0;
     const leftHeight = findLeftHeight(root);
