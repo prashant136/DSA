@@ -100,6 +100,47 @@ const postOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
     return result;
 };
 
+/**
+    - How It Works:
+        👉 Two-Stack Approach:
+        👉 Stack 1 is used to perform a reverse pre-order traversal (Root → Right → Left).
+        👉 Nodes are pushed into Stack 2 during this traversal.
+        👉 Stack 2 then stores the nodes in post-order (Left → Right → Root).
+    - Processing:
+        👉 Start with the root, push it to Stack 1.
+        👉 Push its left and right children to Stack 1 as you traverse.
+        👉 Pop nodes from Stack 1 and push them to Stack 2.
+        👉 Finally, pop all nodes from Stack 2 to get the result in post-order.
+ */
+const postOrderTraversalTwoStack = <T>(root: TreeNode<T> | null): T[] => {
+    const result: T[] = [];
+    if (!root) return result;
+
+    const stack1: TreeNode<T>[] = [];
+    const stack2: TreeNode<T>[] = [];
+
+    stack1.push(root);
+
+    // First stack is used for traversal
+    while (stack1.length > 0) {
+        const node = stack1.pop();
+        if (node) {
+            stack2.push(node); // Push to second stack
+            if (node.left) stack1.push(node.left);   // Push left child
+            if (node.right) stack1.push(node.right); // Push right child
+        }
+    }
+
+    // Second stack gives post-order traversal
+    while (stack2.length > 0) {
+        const node = stack2.pop();
+        if (node) result.push(node.value);
+    }
+
+    return result;
+};
+
+
 
 const root = new TreeNode(10);
 root.left = new TreeNode(6);
@@ -110,9 +151,10 @@ root.left.right.left = new TreeNode(7);
 root.right.right = new TreeNode(20);
 
 // Perform DFS Traversals
-// console.log("In-Order Traversal:", inOrderTraversal(root));
-// console.log("Pre-Order Traversal:", preOrderTraversal(root));
+console.log("In-Order Traversal:", inOrderTraversal(root));
+console.log("Pre-Order Traversal:", preOrderTraversal(root));
 console.log("Post-Order Traversal:", postOrderTraversal(root));
-// console.log("In-Order Traversal using stack:", inOrderTraversalStack(root));
-// console.log("Pre-Order Traversal using stack:", preOrderTraversalStack(root));
+console.log("In-Order Traversal using stack:", inOrderTraversalStack(root));
+console.log("Pre-Order Traversal using stack:", preOrderTraversalStack(root));
 console.log("Post-Order Traversal using stack:", postOrderTraversalStack(root));
+console.log("Post-Order Traversal using two stack:", postOrderTraversalTwoStack(root));
