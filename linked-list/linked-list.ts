@@ -1,24 +1,20 @@
+import { LinkedListNode } from "./linkedlist-utils";
 
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
-}
+class LinkedList<T> {
+    head: LinkedListNode<T> | null;
 
-class LinkedList {
     constructor() {
         this.head = null;
     }
 
-    addFirst(data) {
-        const newNode = new Node(data);
+    addFirst(val: T) {
+        const newNode = new LinkedListNode<T>(val);
         newNode.next = this.head;
         this.head = newNode;
     }
 
-    addLast(data) {
-        const newNode = new Node(data);
+    addLast(val: T) {
+        const newNode = new LinkedListNode<T>(val);
         // if there is no node initially
         if (!this.head) {
             this.head = newNode;
@@ -42,15 +38,15 @@ class LinkedList {
         return count;
     }
 
-    addAt(data, index) {
-        const newNode = new Node(data);
+    addAt(val: T, index: number) {
+        const newNode = new LinkedListNode(val);
         if (index < 0 || index > this.size()) {
             console.log("Invalid Error");
             return;
         }
 
         if (index === 0) {
-            this.addFirst(data);
+            this.addFirst(val);
             return;
         }
         let current = this.head;
@@ -74,13 +70,13 @@ class LinkedList {
         }
 
         let current = this.head;
-        while (current.next.next) {
+        while (current) {
             current = current.next;
         }
         current.next = null;
     }
 
-    deleteAt(index) {
+    deleteAt(index: number) {
         if (index < 0 || index > this.size()) {
             console.log("Invalid Error");
             return;
@@ -94,7 +90,7 @@ class LinkedList {
         for (let i = 0; i < index - 1; i++) {
             current = current.next;
         }
-        if (current.next) {
+        if (current && current.next) {
             current.next = current.next.next;
         }
     }
@@ -102,7 +98,7 @@ class LinkedList {
     print() {
         let current = this.head;
         while (current) {
-            console.log(current.data);
+            console.log(current.value);
             current = current.next;
         }
     }

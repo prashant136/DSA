@@ -30,7 +30,7 @@ const peakIndexInMountainArray = (arr) => {
     while (start < end) {
         let mid = Math.floor(start + (end - start) / 2);
         if (arr[mid] < arr[mid + 1]) {
-            // you are in decending part of array
+            // you are in descending part of array
             // this may be the ans, but look at left
             start = mid + 1; // this is why end != mid - 1
         } else if (arr[mid] > arr[mid + 1]) {
