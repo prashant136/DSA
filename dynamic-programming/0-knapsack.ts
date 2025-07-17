@@ -3,13 +3,11 @@
 //     // Base Case
 //     if (n == 0 || W == 0) return 0;
 
-//     // If weight of the nth item is
-//     // more than Knapsack capacity W,
-//     // then this item cannot be included in the optimal solution
-//     if (weight[n - 1] > W) return knapSack(W, weight, profit, n - 1);
-//     // Return the maximum of two cases:
-//     // (1) nth item included
-//     // (2) not included
+//     // If weight of the nth item is more than Knapsack capacity W, then this item can't be included in the optimal solution
+//     if (weight[n - 1] > W) {
+//         return knapSack(W, weight, profit, n - 1);
+//     }
+//     // otherwise return the max(nth item included, not included)
 //     else
 //         return Math.max(
 //             profit[n - 1] + knapSack(W - weight[n - 1], weight, profit, n - 1),
@@ -52,7 +50,7 @@
 // console.log(knapSackDP(W, weight, profit, n, dp));
 
 // 👋 -------------- iterative ----------------
-function knapSack(W, weight, profit, n) {
+function knapSack(W: number, weight: number[], profit:number[], n: number) {
     let dp = new Array(n + 1).fill(-1).map((el) => new Array(W + 1).fill(-1));
 
     // Initialize the base case (i.e., for 0 items or 0 capacity)
@@ -64,17 +62,27 @@ function knapSack(W, weight, profit, n) {
         }
     }
 
+    console.table(dp);
+    
     // Fill the dp table based on previous computed results
     for (let i = 1; i < n + 1; i++) {
         for (let j = 1; j < W + 1; j++) {
             if (weight[i - 1] > j) {
+                console.log("IF...", dp[i - 1][j]);
+                
                 dp[i][j] = dp[i - 1][j]; // Cannot include the item
             } else {
+                console.log('ELSE...', Math.max(
+                    profit[i - 1] + dp[i - 1][j - weight[i - 1]], // Include the item
+                    dp[i - 1][j] // Exclude the item
+                ));
+                
                 dp[i][j] = Math.max(
                     profit[i - 1] + dp[i - 1][j - weight[i - 1]], // Include the item
                     dp[i - 1][j] // Exclude the item
                 );
             }
+            console.table(dp)
         }
     }
 
@@ -82,8 +90,7 @@ function knapSack(W, weight, profit, n) {
     return dp[n][W];
 }
 
-let profit = [60, 100, 120];
-let weight = [10, 20, 30];
-let W = 50;
-let n = profit.length;
-console.log(knapSack(W, weight, profit, n));
+let profit = [1, 4, 5, 7];
+let weight = [1, 3, 4, 5];
+let W = 3;
+console.log(knapSack(W, weight, profit, profit.length));
