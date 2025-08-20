@@ -69,7 +69,7 @@ class Graph {
             }
         }
     }
-    private dfs(source: number, destination: number, graph: Map<number, number[]>(), visited: Set<number>()): boolean {
+    // private dfs(source: number, destination: number, graph: Map<number, number[]>(), visited: Set<number>()): boolean {
     public printAdjList(): void {
         console.log("Adjacency List:");
         for (const [node, neighbors] of this.adjList) {
@@ -78,12 +78,12 @@ class Graph {
     }
 }
 
-// const edgeList = [ [1,2], [2,3], [3,4], [4,2], [1,3] ];
+const edgeList = [ [1,2], [2,3], [3,4], [4,2], [1,3] ];
 
-// console.log("Directed Graph:");
-// const directedGraph = new Graph(edgeList, true);
-// directedGraph.printAdjList();
+console.log("Directed Graph:");
+const directedGraph = new Graph(edgeList, true);
+directedGraph.printAdjList();
 
-// console.log("\nUndirected Graph:");
-// const undirectedGraph = new Graph(edgeList, false);
-// undirectedGraph.printAdjList();
+console.log("\nUndirected Graph:");
+const undirectedGraph = new Graph(edgeList, false);
+undirectedGraph.printAdjList();

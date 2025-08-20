@@ -1,20 +1,20 @@
-import { LinkedListNode } from "./linkedlist-utils";
+import { ListNode } from "./linkedlist-utils";
 
 class LinkedList<T> {
-    head: LinkedListNode<T> | null;
+    head: ListNode<T> | null;
 
     constructor() {
         this.head = null;
     }
 
     addFirst(val: T) {
-        const newNode = new LinkedListNode<T>(val);
+        const newNode = new ListNode<T>(val);
         newNode.next = this.head;
         this.head = newNode;
     }
 
     addLast(val: T) {
-        const newNode = new LinkedListNode<T>(val);
+        const newNode = new ListNode<T>(val);
         // if there is no node initially
         if (!this.head) {
             this.head = newNode;
@@ -39,7 +39,7 @@ class LinkedList<T> {
     }
 
     addAt(val: T, index: number) {
-        const newNode = new LinkedListNode(val);
+        const newNode = new ListNode(val);
         if (index < 0 || index > this.size()) {
             console.log("Invalid Error");
             return;

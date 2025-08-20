@@ -37,6 +37,8 @@ class LinkedList {
                 l2 = l2.next;
             }
         }
+        // console.log({l1, l2});
+        
         // If one list is exhausted, point to the remaining elements of the other list
         if (l1) {
             current.next = l1;

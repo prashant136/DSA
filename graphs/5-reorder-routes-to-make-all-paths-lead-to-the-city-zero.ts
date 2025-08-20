@@ -10,12 +10,16 @@ function minReorder(n: number, connections: number[][]): number {
         backwardNbrs[b].push(a);  // Already correct direction
     }
 
+    console.log({forwardNbrs, backwardNbrs});
+    
     let ans = 0;
 
     function dfs(node: number): void {
         visited[node] = true;
 
         for (const nbr of forwardNbrs[node]) {
+            console.log({forwardNbrs: forwardNbrs[node], nbr});
+            
             if (!visited[nbr]) {
                 ans += 1; // Need to reverse this edge
                 dfs(nbr);
