@@ -38,7 +38,6 @@
 // 6. The time complexity is O(V + E), where V is the number of vertices and E is the number of edges.
 // 7. The space complexity is O(V) for the visited set and the adjacency list.
 // 8. The algorithm is efficient for large graphs and can handle cycles and disconnected components.
-// 9. The algorithm can be implemented using either BFS or DFS.
 class Graph {
     private buildGraph(edges: number[][], adjList: Map<number, number[]>): Map<number, number[]> {
         for (const [u, v] of edges) {

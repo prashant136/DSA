@@ -11,11 +11,17 @@ class Heap {
 
   // Swap two elements in the heap
   public swap = (i: number, j: number) => {
+    console.log("before swap", {i, j}, this.heap);
+    
     [this.heap[i], this.heap[j]] = [this.heap[j], this.heap[i]];
+    console.log('after swap-', this.heap);
+    
   }
 
   // Heapify function to maintain max-heap property
   public heapify(index: number) {
+    console.log(' 🧠 heapify runs');
+    
     // Initially assume node is the largest. then we will compare the node with their left and right child and update the largest.
     let largest = index;
     let leftChildIndex = 2 * index + 1;
@@ -48,10 +54,14 @@ class Heap {
 
   // Increase the key value at given index
   public increaseKey(index: number, newValue: number) {
+    console.log('------- increaseKey --------');
+    
     if (index < 0 || index >= this.heapSize || this.heap[index] >= newValue) {
       return;
     }
     this.heap[index] = newValue;
+    console.log('after >>>>', this.heap, {index});
+    
     // Move the node up while it's greater than its parent
     while (index > 0 && this.heap[index] > this.heap[Math.ceil((index / 2) - 1)]) {
       this.swap(index, Math.ceil((index / 2) - 1));
@@ -120,6 +130,8 @@ class Heap {
     // n / 2 to n - 1  // leaf nodes
     // 0 to ((n / 2) - 1)  // non leaf nodes
     for (let i = Math.ceil((this.heapSize / 2) - 1); i >= 0; i--) {   // apply heapify to non leaf nodes [ 0 - (n/2)-1 ] size. we don't apply heapify at leaf nodes.
+      console.log({i});
+      
       this.heapify(i);  // Apply heapify to non-leaf nodes
     }
   }
@@ -139,8 +151,15 @@ let arr = [10, 5, 20, 6, 11];
 const obj = new Heap(arr);
 obj.buildTree();
 // console.log('after the removal of max element', obj.extarctMax());
-// obj.increaseKey(4, 15);
-// obj.decreseKey(0, 4);
+// obj.increaseKey(4, 25);
+obj.decreseKey(0, 4);
 // obj.insert(25);
 // console.log('heapsort', obj.heapSort());
-// obj.printTree();
+obj.printTree();
+
+
+
+/**
+ * 
+ * 
+ */

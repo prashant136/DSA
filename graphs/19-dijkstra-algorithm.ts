@@ -104,24 +104,37 @@ function dijkstra(graph: Graph, start: number): Map<number, number> {
 
     // Initialize all distances as Infinity
     for (const node of graph.keys()) {
+        // console.log('node--', node);
         distances.set(node, Infinity);
     }
 
     // Distance to start node is 0
     distances.set(start, 0);
     pq.insert([0, start]); // start processing from source
+    
 
     while (!pq.isEmpty()) {
         const [currentDist, currentNode] = pq.extractMin()!;
+        console.log({ currentDist, currentNode });
 
         // Skip if already processed
         if (visited.has(currentNode)) continue;
         visited.add(currentNode);
 
+        // console.log({visited});
+        
+
         const neighbors = graph.get(currentNode) || [];
+
+        console.log('neighbors:: ', neighbors);
+        
 
         for (const [neighbor, weight] of neighbors) {
             const totalDist = currentDist + weight;
+
+            console.log('totalDist >>', totalDist);
+            console.log(`distances.get(${neighbor}) >>', ${distances.get(neighbor)}`);
+            
 
             // If this path is shorter, update and enqueue the neighbor
             if (totalDist < (distances.get(neighbor) || Infinity)) {

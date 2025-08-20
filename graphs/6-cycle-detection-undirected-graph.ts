@@ -103,4 +103,4 @@ function isCycleBFS(V: number, edges: number[][]): boolean {
 }
 
 console.log(isCycleBFS(4, [[0, 1], [0, 2], [1, 2], [2, 3]])); // true
-console.log(isCycleBFS(4, [[0, 1], [1, 2], [2, 3]])); 
+// console.log(isCycleBFS(4, [[0, 1], [1, 2], [2, 3]])); 
