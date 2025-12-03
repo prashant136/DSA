@@ -1,6 +1,6 @@
 // https://www.geeksforgeeks.org/subset-sum-problem-dp-25/
 
-function isSubsetSum(arr: number[], n: number, sum: number) {
+function isSubsetSum(arr, n, sum) {
     if (sum === 0) return true;
     if (n === 0) return false;
 
@@ -49,11 +49,11 @@ function isSubsetSum(arr: number[], n: number, sum: number) {
         Return true if any is true.
  */
 
-function subsetSumTopDown(arr: number[], sum: number): boolean {
+function subsetSumTopDown(arr, sum) {
     const n = arr.length;
     const memo = Array.from({ length: n }, () => Array(sum + 1).fill(-1));
 
-    function dfs(i: number, target: number): boolean {
+    function dfs(i, target) {
         if (target === 0) return true;
         if (i < 0) return false;
 
@@ -80,7 +80,7 @@ function subsetSumTopDown(arr: number[], sum: number): boolean {
  * 
  */
 
-function subsetSumBottomUp(arr: number[], sum: number): boolean {
+function subsetSumBottomUp(arr, sum) {
     const n = arr.length;
     const dp = Array.from({ length: n+1 }, () => Array(sum + 1).fill(false));
 
