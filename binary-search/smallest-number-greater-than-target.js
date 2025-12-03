@@ -35,7 +35,7 @@ const nextGreatestLetter = (letters, target) => {
         }
     }
     // Wrap around if the end index goes beyond the array size
-    return letters[start % letters.length];
+    return letters[start % letters.length];         // ceil value
     // return start < letters.length ? letters[start] : letters[0];
 };
 

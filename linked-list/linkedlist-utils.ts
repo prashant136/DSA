@@ -8,12 +8,12 @@ export class ListNode<T> {
     }
 }
 
-export class doublyLinkedListNode<T> {
+export class DoublyLinkedListNode<T> {
     value: T;
-    next: doublyLinkedListNode<T> | null;
-    prev: doublyLinkedListNode<T> | null;
+    next: DoublyLinkedListNode<T> | null;
+    prev: DoublyLinkedListNode<T> | null;
 
-    constructor(value: T, next: doublyLinkedListNode<T> | null = null, prev: doublyLinkedListNode<T> | null = null) {
+    constructor(value: T, next: DoublyLinkedListNode<T> | null = null, prev: DoublyLinkedListNode<T> | null = null) {
         this.value = value;
         this.next = next;
         this.prev = prev;

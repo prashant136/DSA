@@ -1,18 +1,13 @@
-class Node {
-    constructor(data) {
-        this.data = data;
-        this.prev = null;
-        this.next = null;
-    }
-}
+import { DoublyLinkedListNode } from "./linkedlist-utils";
 
-class DoublyLinkedList {
+export class DoublyLinkedList<T> {
+    head: DoublyLinkedListNode<T> | null;
     constructor() {
         this.head = null;
     }
 
     addFirst(data) {
-        const newNode = new Node(data);
+        const newNode = new DoublyLinkedListNode<T>(data);
         newNode.next = this.head;
         if (this.head) {
             this.head.prev = newNode;
@@ -21,7 +16,7 @@ class DoublyLinkedList {
     }
 
     addLast(data) {
-        const newNode = new Node(data);
+        const newNode = new DoublyLinkedListNode<T>(data);
         // if there is no node initially
         if (!this.head) {
             this.head = newNode;
@@ -47,7 +42,7 @@ class DoublyLinkedList {
     }
 
     addAt(data, index) {
-        const newNode = new Node(data);
+        const newNode = new DoublyLinkedListNode<T>(data);
         if (index < 0 || index > this.size()) {
             console.log("Invalid Error");
             return;

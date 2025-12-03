@@ -1,6 +1,6 @@
-import { ListNode } from "./linkedlist-utils";
+import { ListNode } from "./linkedlist-utils.ts";
 
-class LinkedList<T> {
+export class LinkedList<T> {
     head: ListNode<T> | null;
 
     constructor() {
@@ -51,10 +51,12 @@ class LinkedList<T> {
         }
         let current = this.head;
         for (let i = 0; i < index - 1; i++) {
-            current = current.next;
+            if(current) current = current.next;
         }
-        newNode.next = current.next;
-        current.next = newNode;
+        if(current) {
+            newNode.next = current.next;
+            current.next = newNode;
+        }
     }
 
     deleteFirst() {
@@ -73,7 +75,7 @@ class LinkedList<T> {
         while (current) {
             current = current.next;
         }
-        current.next = null;
+        if(current && current.next) current.next = null;
     }
 
     deleteAt(index: number) {
@@ -96,6 +98,8 @@ class LinkedList<T> {
     }
 
     print() {
+        console.log('print run...');
+        
         let current = this.head;
         while (current) {
             console.log(current.value);
@@ -105,13 +109,13 @@ class LinkedList<T> {
 
 }
 
-const linkedlist = new LinkedList();
-linkedlist.addFirst(10);
-linkedlist.addFirst(20);
-linkedlist.addLast(30);
-linkedlist.addLast(100);
-linkedlist.addAt(40, 3);
-linkedlist.deleteFirst();
-linkedlist.deleteLast();
-linkedlist.deleteAt(1);
-linkedlist.print();
+// const linkedlist = new LinkedList();
+// linkedlist.addFirst(10);
+// linkedlist.addFirst(20);
+// linkedlist.addLast(30);
+// linkedlist.addLast(100);
+// linkedlist.addAt(40, 3);
+// linkedlist.deleteFirst();
+// linkedlist.deleteLast();
+// linkedlist.deleteAt(1);
+// linkedlist.print();

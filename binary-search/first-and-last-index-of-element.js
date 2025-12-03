@@ -21,6 +21,34 @@
     Output: [-1,-1]
  */
 
+    /**
+        * 1) Find First Occurrence (Left boundary)
+
+        Even if we find target at mid,
+        we don’t stop — we move left (right = mid - 1)
+        because an earlier occurrence may exist.
+
+        2) Find Last Occurrence (Right boundary)
+
+        Even if we find target at mid,
+        we don’t stop — we move right (left = mid + 1)
+        because a later occurrence may exist.
+
+        This “keep searching after finding target” is the entire trick.
+        
+        🧩 Two Helpful Mental Models
+        Model 1: Treat it like searching for a boundary
+
+        We are searching for the boundary:
+
+        [non-target][target target target][non-target]
+                    ↑ first           ↑ last
+
+
+        Left boundary = first target
+        Right boundary = last target
+     */
+
 // ✅ 👑 facebook
 const binarySearch = (nums, target, findFirstIndex) => {
     let start = 0;
@@ -51,6 +79,6 @@ const searchRange = (nums, target) => {
     return [firstIndex, lastIndex];
 };
 
-let arr = [5, 7, 7, 8, 8, 8, 8, 10];
+let arr = [5, 7, 7, 8, 8, 8, 8, 8,8,8,8,8,8,10];
 let target = 8;
 console.log(searchRange(arr, target));

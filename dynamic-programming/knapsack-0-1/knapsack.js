@@ -22,9 +22,9 @@
 
     🧠 Intuition Behind DP in Knapsack
         function knapsack(i: number, w: number): number
-       The main idea is to decide for each item:
-        - Include it (and reduce remaining capacity accordingly)
-        - Exclude it (move on to next item)
+        The main idea is to decide for each item:
+            - Include it (and reduce remaining capacity accordingly)
+            - Exclude it (move on to next item)
         We evaluate both choices recursively and take the maximum of the two.
 
     
@@ -76,11 +76,11 @@
         }
 */
 
-function knapsackTopDown(weights: number[], values: number[], W: number): number {
+function knapsackTopDown(weights, values, W) {
     const n = weights.length;
     const memo = Array.from({ length: n }, () => Array(W + 1).fill(-1));
 
-    function dp(i: number, w: number): number {
+    function dp(i, w) {
         if (i < 0 || w === 0) return 0;
         if (memo[i][w] !== -1) return memo[i][w];
 
@@ -100,6 +100,24 @@ function knapsackTopDown(weights: number[], values: number[], W: number): number
 /**        
     📥 Tabulation (Bottom-Up) ::
         In tabulation, we build a table from smaller subproblems (no recursion).
+
+        dp[i][w] = max(
+            dp[i-1][w],                         // exclude item i
+            value[i] + dp[i-1][w - weight[i]]   // include item i  (if w >= weight[i])
+        )
+
+        Interpretation:
+         - i (row) = number of items considered (or index of current item).
+         - w (column) = remaining capacity (0..W).
+         - To know best using first i items, you must know best using first i-1 items → that’s why each row depends on the previous row.
+
+        2) Why rows depend on previous rows (intuition)
+            Think of the table as a ledger:
+            - Row i answers the question: “What’s the best value I can get with capacity w if I MAY use item i (and items before it)?”
+            - To decide whether to take item i, you need the answer for the situation without item i (that’s row i-1).
+            - If you include item i, you reduce capacity to w - weight[i], and again you need the best result for that smaller capacity but only from items 0..i-1 → dp[i-1][w - weight[i]].
+            - So both include/exclude branches query row i-1. That’s the exact reason values come from the previous row (not columns).
+            - Columns correspond to capacity levels. They’re independent decisions for each capacity, but the item decisions flow vertically from previous rows
     
         🧱 DP Table:
             Let dp[i][w] = max value we can get with first i items and capacity w
@@ -108,13 +126,13 @@ function knapsackTopDown(weights: number[], values: number[], W: number): number
                 dp[i][w] = dp[i-1][w]   // can’t include current item
             Else:
                 dp[i][w] = max(
-                    dp[i-1][w],                          // exclude
+                    dp[i-1][w],                           // exclude
                     value[i-1] + dp[i-1][w - weight[i-1]] // include
                 )
         
         ✅ Base Case:
             dp[0][w] = 0 for all w
-            dp[i][0] = 0 for all i (0 capacity ⇒ 0 value)
+            dp[i][0] = 0 for all i (0 capacity -> 0 value)
         
 
         📄 Bottom-Up Code -
@@ -149,7 +167,7 @@ function knapsackTopDown(weights: number[], values: number[], W: number): number
 
 */
 
-function knapsackBottomUp(weights: number[], values: number[], W: number): number {
+function knapsackBottomUp(weights, values, W) {
     const n = weights.length;
     const dp = Array.from({ length: n + 1 }, () => Array(W + 1).fill(0));
 
@@ -167,4 +185,21 @@ function knapsackBottomUp(weights: number[], values: number[], W: number): numbe
     }
 
     return dp[n][W];
+
+
+    // space optimized - O(n)
+    let prev = Array(W + 1).fill(0);
+    let curr = Array(W + 1).fill(0);
+
+    for (let i = 1; i <= n; i++) {
+        for (let w = 0; w <= W; w++) {
+            if (weights[i - 1] <= w) {
+                curr[w] = Math.max(prev[w], values[i - 1] + prev[w - weights[i - 1]]);
+            } else {
+                curr[w] = prev[w];
+            }
+        }
+        prev = [...curr];
+    }
+
 }
