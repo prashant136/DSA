@@ -71,46 +71,39 @@ const postOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] 
 const postOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
     let result: T[] = [];
     let stack: TreeNode<T>[] = [];
-    let node: TreeNode<T> | null = root;
+    let lastVisited: TreeNode<T> | null = null;
+    let current: TreeNode<T> | null = root;
 
-    // Continue traversal until both the stack is empty and the current node is null
-    while (node !== null || stack.length) {
-        // Step 1: Traverse the left subtree as deep as possible
-        while (node) {
-            stack.push(node); // Push the current node to the stack
-            node = node.left; // Move to the left child
+    while (current !== null || stack.length > 0) {
+        // Step 1: Go left as much as possible
+        while (current) {
+            stack.push(current);
+            current = current.left;
         }
 
-        // Step 2: Handle the right subtree or process the current node
-        if (stack[stack.length - 1].right !== null) {
-            // Case 1: If the right child exists, move to the right child
-            node = stack[stack.length - 1].right;
-        } else {
-            // Case 2: If the right child does not exist, process nodes in postorder
-            let temp = stack.pop(); // Pop the current node from the stack
-            if (temp) result.push(temp.value); // Add the node's value to the result array
+        let top = stack[stack.length - 1];
 
-            // Check if the popped node was the right child of its parent
-            while (stack.length && temp === stack[stack.length - 1].right) {
-                temp = stack.pop(); // Pop the parent node
-                if (temp) result.push(temp.value); // Add the parent node's value to the result array
-            }
+        // Step 2: If right child exists and not visited → go right
+        if (top.right && lastVisited !== top.right) {
+            current = top.right;
+        } 
+        // Step 3: Otherwise → process node
+        else {
+            result.push(top.value);
+            lastVisited = stack.pop()!;
         }
     }
+
     return result;
 };
+
 
 /**
     - How It Works:
         👉 Two-Stack Approach:
-        👉 Stack 1 is used to perform a reverse pre-order traversal (Root → Right → Left).
+        👉 Stack 1 -> reverse pre-order traversal (Root → Right → Left).
         👉 Nodes are pushed into Stack 2 during this traversal.
-        👉 Stack 2 then stores the nodes in post-order (Left → Right → Root).
-    - Processing:
-        👉 Start with the root, push it to Stack 1.
-        👉 Push its left and right children to Stack 1 as you traverse.
-        👉 Pop nodes from Stack 1 and push them to Stack 2.
-        👉 Finally, pop all nodes from Stack 2 to get the result in post-order.
+        👉 Stack 2 -> Then reverse the result → Left → Right → Root.
  */
 const postOrderTraversalTwoStack = <T>(root: TreeNode<T> | null): T[] => {
     const result: T[] = [];
@@ -150,6 +143,14 @@ root.left.right = new TreeNode(8);
 root.left.right.left = new TreeNode(7);
 root.right.right = new TreeNode(20);
 
+
+            //         10
+            //      /     \
+            //     6       15
+            //    /  \       \
+            //   4    8      20
+            //      /
+            //     20 
 // Perform DFS Traversals
 console.log("In-Order Traversal:", inOrderTraversal(root));
 console.log("Pre-Order Traversal:", preOrderTraversal(root));
