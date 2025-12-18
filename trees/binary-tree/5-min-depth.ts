@@ -1,6 +1,6 @@
 import { TreeNode } from "../tree-utils.ts";
 
-function minDepth(root: TreeNode) {
+function minDepth(root: TreeNode | null): number {
     if (root == null) return 0;
 
     // leaf node

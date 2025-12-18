@@ -9,11 +9,11 @@
  */
 import { TreeNode } from "../tree-utils.ts";
 
-function averageOfLevels<T extends number>(root: TreeNode<T>): T[] {
+function averageOfLevels(root: TreeNode): number[] {
     if (!root) return [];
 
-    let queue: TreeNode<T>[] = [];
-    let result: T[] = [];
+    let queue: TreeNode[] = [];
+    let result: number[] = [];
     queue.push(root);
 
     while (queue.length) {
@@ -29,7 +29,7 @@ function averageOfLevels<T extends number>(root: TreeNode<T>): T[] {
             if (node.right) queue.push(node.right);
         }
 
-        let averageLevels = sum / levelSize as T; // Explicit casting to T
+        let averageLevels = sum / levelSize as number;
         result.push(averageLevels);
     }
     return result;

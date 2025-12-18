@@ -1,9 +1,9 @@
-export class TreeNode<T> {
-    value: T;
-    left: TreeNode<T> | null;
-    right: TreeNode<T> | null;
+export class TreeNode {
+    value: number;
+    left: TreeNode | null;
+    right: TreeNode | null;
 
-    constructor(value: T, left: TreeNode<T> | null = null, right: TreeNode<T> | null = null) {
+    constructor(value: number, left: TreeNode | null = null, right: TreeNode | null = null) {
         this.value = value;
         this.left = left;
         this.right = right;

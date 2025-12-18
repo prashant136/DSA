@@ -1,14 +1,14 @@
 import { TreeNode } from "../tree-utils.ts";
 
-const countNodes = function(root: TreeNode): number {
-    if(!root) return 0;
-    
+const countNodes = function (root: TreeNode | null): number {
+    if (!root) return 0;
+
     return 1 + countNodes(root.left) + countNodes(root.right);
 };
 
-const sumNodes = function(root: TreeNode): number {
-    if(!root) return 0;
-    
+const sumNodes = function (root: TreeNode | null): number {
+    if (!root) return 0;
+
     return root.value + sumNodes(root.left) + sumNodes(root.right);
 };
 

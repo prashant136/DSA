@@ -1,7 +1,7 @@
 import { TreeNode } from "../tree-utils.ts";
 
 // ---------------------------------------- In-Order Traversal  ------------------------------------------------
-const inOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] => {
+const inOrderTraversal = (root: TreeNode | null, result: number[] = []): number[] => {
     if (root) {
         inOrderTraversal(root.left, result)
         result.push(root.value);
@@ -10,10 +10,10 @@ const inOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] =>
     return result;
 }
 // using stack - left -> root -> right
-const inOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
-    const result: T[] = [];
-    const stack: TreeNode<T>[] = [];
-    let current: TreeNode<T> | null = root;
+const inOrderTraversalStack = (root: TreeNode): number[] => {
+    const result: number[] = [];
+    const stack: TreeNode[] = [];
+    let current: TreeNode | null = root;
 
     while (current !== null || stack.length > 0) {
         // Traverse to the leftmost node
@@ -32,7 +32,7 @@ const inOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
 }
 
 // ---------------------------------------- Pre-Order Traversal --------------------------------------------
-const preOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] => {
+const preOrderTraversal = (root: TreeNode | null, result: number[] = []): number[] => {
     if (root) {
         result.push(root.value);
         preOrderTraversal(root.left, result)
@@ -41,9 +41,9 @@ const preOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] =
     return result;
 };
 // using stack - root -> left -> right
-const preOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
-    let result: T[] = [];
-    let stack: TreeNode<T>[] = [];
+const preOrderTraversalStack = (root: TreeNode): number[] => {
+    let result: number[] = [];
+    let stack: TreeNode[] = [];
     if (!root) return result;
 
     stack.push(root);
@@ -59,7 +59,7 @@ const preOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
 };
 
 // ----------------------------------------- Post-Order Traversal ------------------------------------------
-const postOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] => {
+const postOrderTraversal = <T>(root: TreeNode | null, result: number[] = []): number[] => {
     if (root) {
         postOrderTraversal(root.left, result);
         postOrderTraversal(root.right, result);
@@ -68,11 +68,11 @@ const postOrderTraversal = <T>(root: TreeNode<T> | null, result: T[] = []): T[] 
     return result;
 };
 // using stack - left -> right -> root
-const postOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
-    let result: T[] = [];
-    let stack: TreeNode<T>[] = [];
-    let lastVisited: TreeNode<T> | null = null;
-    let current: TreeNode<T> | null = root;
+const postOrderTraversalStack = (root: TreeNode): number[] => {
+    let result: number[] = [];
+    let stack: TreeNode[] = [];
+    let lastVisited: TreeNode | null = null;
+    let current: TreeNode | null = root;
 
     while (current !== null || stack.length > 0) {
         // Step 1: Go left as much as possible
@@ -86,7 +86,7 @@ const postOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
         // Step 2: If right child exists and not visited → go right
         if (top.right && lastVisited !== top.right) {
             current = top.right;
-        } 
+        }
         // Step 3: Otherwise → process node
         else {
             result.push(top.value);
@@ -105,12 +105,12 @@ const postOrderTraversalStack = <T>(root: TreeNode<T>): T[] => {
         👉 Nodes are pushed into Stack 2 during this traversal.
         👉 Stack 2 -> Then reverse the result → Left → Right → Root.
  */
-const postOrderTraversalTwoStack = <T>(root: TreeNode<T> | null): T[] => {
-    const result: T[] = [];
+const postOrderTraversalTwoStack = <T>(root: TreeNode | null): number[] => {
+    const result: number[] = [];
     if (!root) return result;
 
-    const stack1: TreeNode<T>[] = [];
-    const stack2: TreeNode<T>[] = [];
+    const stack1: TreeNode[] = [];
+    const stack2: TreeNode[] = [];
 
     stack1.push(root);
 
@@ -144,13 +144,13 @@ root.left.right.left = new TreeNode(7);
 root.right.right = new TreeNode(20);
 
 
-            //         10
-            //      /     \
-            //     6       15
-            //    /  \       \
-            //   4    8      20
-            //      /
-            //     20 
+//         10
+//      /     \
+//     6       15
+//    /  \       \
+//   4    8      20
+//      /
+//     20 
 // Perform DFS Traversals
 console.log("In-Order Traversal:", inOrderTraversal(root));
 console.log("Pre-Order Traversal:", preOrderTraversal(root));

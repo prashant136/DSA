@@ -1,10 +1,10 @@
 import { TreeNode } from "../tree-utils";
 
-const bfsTraversal = <T>(root: TreeNode<T>|null): T[] => {
-    const result: T[] = [];
+const bfsTraversal = (root: TreeNode | null): number[] => {
+    const result: number[] = [];
     if (!root) return result;
 
-    const queue: TreeNode<T>[] = [];
+    const queue: TreeNode[] = [];
     queue.push(root);
 
     while (queue.length) {

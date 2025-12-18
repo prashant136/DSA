@@ -1,51 +1,52 @@
 import { TreeNode } from '../tree-utils.ts';
 
-class ValidBinarySearchTree<T extends number> {
+class ValidBinarySearchTree {
 
     // Using specified range of Min and Max Values – O(n) Time and O(h) Space
-    validate<T>(node: TreeNode<T> | null, min: T, max: T): boolean {
-        if (node === null) {
-            return true;
-        }
-        // If the current node's data is not in the valid range, return false
-        if (node.value < min || node.value > max) {
-            return false;
-        }
+    isValidBST(root: TreeNode | null) {
+        return this.validate(root, -Infinity, Infinity);
 
-        const leftTree = this.validate(node.left, min, node.value);
-        const rightTree = this.validate(node.right, node.value, max);
-        return leftTree && rightTree;
+    }
+    validate(node: TreeNode | null, min: number, max: number): boolean {
+        if (node === null) return true;
+
+        if (node.value <= min || node.value >= max) return false;
+
+        return (
+            this.validate(node.left, min, node.value) &&
+            this.validate(node.right, node.value, max)
+        );
     }
     // BFS
-    isValidBFS(root: TreeNode<number> | null): boolean {
+    isValidBFS(root: TreeNode | null): boolean {
         if (!root) return true;
-    
-        let queue: [TreeNode<number>, number, number][] = [];
+
+        let queue: [TreeNode, number, number][] = [];
         queue.push([root, -Infinity, Infinity]); // Start with the whole valid range
-    
+
         while (queue.length) {
             let [node, min, max] = queue.shift()!;
-    
+
             // If node value is out of the valid range, return false
             if (node.value <= min || node.value >= max) return false;
-    
+
             // Left child must be within (min, node.value)
             if (node.left) queue.push([node.left, min, node.value]);
-    
+
             // Right child must be within (node.value, max)
             if (node.right) queue.push([node.right, node.value, max]);
         }
-    
+
         return true; // If all nodes are valid, it's a BST
     }
-    
+
     // Using Inorder Traversal – O(n) Time and O(h) Space
     /**
      * The idea is to use inorder traversal of a binary search tree,
      * in which the output values are sorted in ascending order. After generating
      * the inorder traversal of the given binary tree, we can check if the values are sorted or not.
      */
-    validateWithInorder<T>(node: TreeNode<T> | null, min: T, max: T) {
+    validateWithInorder(node: TreeNode | null, min: number, max: number) {
 
     }
 

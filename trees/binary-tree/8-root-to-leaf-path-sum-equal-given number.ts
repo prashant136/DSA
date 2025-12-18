@@ -1,6 +1,6 @@
 import { TreeNode } from "../tree-utils.ts";
 
-function hasPathSum(root, sum) {
+function hasPathSum(root: TreeNode | null, sum: number) {
     if (!root) return false;
 
     sum-= root.value;

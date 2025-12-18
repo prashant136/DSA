@@ -2,9 +2,9 @@ import { TreeNode } from "../tree-utils.ts";
 
 class HeightOfTree<T extends number> {
 
-    maxDepthBFS = (root: TreeNode<T>): number => {
+    maxDepthBFS = (root: TreeNode | null): number => {
         if (!root) return 0;
-        let queue: TreeNode<T>[] = [];
+        let queue: TreeNode[] = [];
         let level = 0
 
         queue.push(root);
@@ -17,12 +17,12 @@ class HeightOfTree<T extends number> {
                 if (node && node.right) queue.push(node.right);
             }
             // if size is ZERO -> we have crossed a complete level...
-            if (queue.length) level++; 
+            if (queue.length) level++;
         }
         return level + 1;
     }
 
-    maxDepthDFS = (root: TreeNode<T>) => {
+    maxDepthDFS = (root: TreeNode) => {
         if (!root) return 0;
 
         let lh = 0;
