@@ -32,7 +32,7 @@ function LongestCommonStr(s1, s2) {
     let res = 0;
     let m = s1.length;
     let n = s2.length;
-    const dp = Array.from({ length: m+1 }, () => Array(n+1).fill(-1));
+    const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(-1));
 
     console.table(dp);
 
@@ -41,9 +41,9 @@ function LongestCommonStr(s1, s2) {
             return 0;
         }
 
-        if(dp[i][j] !== -1) return dp[i][j];
+        if (dp[i][j] !== -1) return dp[i][j];
 
-        if(s1[i - 1] !== s2[j - 1]) {
+        if (s1[i - 1] !== s2[j - 1]) {
             dp[i][j] = 0
         } else {
             dp[i][j] = 1 + helper(i - 1, j - 1);
@@ -51,7 +51,7 @@ function LongestCommonStr(s1, s2) {
         return dp[i][j];
     }
 
-    
+
     for (let i = 1; i <= m; i++) {
         for (let j = 1; j <= n; j++) {
             res = Math.max(res, helper(i, j));

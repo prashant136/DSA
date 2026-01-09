@@ -50,7 +50,6 @@ function longestCommonSubsequenceBottomUp(str1, str2) {
             }
         }
     }
-
     return dp[n][m];
 }
 

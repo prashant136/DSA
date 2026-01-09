@@ -1,20 +1,20 @@
 import { ListNode } from "./linkedlist-utils.ts";
 
-export class LinkedList<T> {
-    head: ListNode<T> | null;
+export class LinkedList {
+    head: ListNode | null;
 
     constructor() {
         this.head = null;
     }
 
-    addFirst(val: T) {
-        const newNode = new ListNode<T>(val);
+    addFirst(val: number) {
+        const newNode = new ListNode(val);
         newNode.next = this.head;
         this.head = newNode;
     }
 
-    addLast(val: T) {
-        const newNode = new ListNode<T>(val);
+    addLast(val: number) {
+        const newNode = new ListNode(val);
         // if there is no node initially
         if (!this.head) {
             this.head = newNode;
@@ -38,7 +38,7 @@ export class LinkedList<T> {
         return count;
     }
 
-    addAt(val: T, index: number) {
+    addAt(val: number, index: number) {
         const newNode = new ListNode(val);
         if (index < 0 || index > this.size()) {
             console.log("Invalid Error");

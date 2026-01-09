@@ -1,19 +1,19 @@
-export class ListNode<T> {
-    value: T;
-    next: ListNode<T> | null;
+export class ListNode {
+    value: number;
+    next: ListNode | null;
 
-    constructor(value: T, next: ListNode<T> | null = null) {
+    constructor(value: number, next: ListNode | null = null) {
         this.value = value;
         this.next = next;
     }
 }
 
-export class DoublyLinkedListNode<T> {
-    value: T;
-    next: DoublyLinkedListNode<T> | null;
-    prev: DoublyLinkedListNode<T> | null;
+export class DoublyLinkedListNode {
+    value: number;
+    next: DoublyLinkedListNode | null;
+    prev: DoublyLinkedListNode | null;
 
-    constructor(value: T, next: DoublyLinkedListNode<T> | null = null, prev: DoublyLinkedListNode<T> | null = null) {
+    constructor(value: number, next: DoublyLinkedListNode | null = null, prev: DoublyLinkedListNode | null = null) {
         this.value = value;
         this.next = next;
         this.prev = prev;
