@@ -1,33 +1,57 @@
 // https://leetcode.com/problems/reorder-list/?envType=problem-list-v2&envId=stack
 
+/*
+    Reorder List =
+    Find middle → Reverse second half → Merge two halves
+
+    No stack. No extra nodes. No extra space.
+*/
+
+class ListNode {
+    val: number
+    next: ListNode | null
+    constructor(val?: number, next?: ListNode | null) {
+        this.val = (val === undefined ? 0 : val)
+        this.next = (next === undefined ? null : next)
+    }
+}
+
 function reorderList(head: ListNode | null): void {
+    if (!head || !head.next) return;
 
-    if(!head && !head.next) return;
-    let fast = head;
-    let slow = head;
+    // 1. Find middle
+    let slow: ListNode | null = head;
+    let fast: ListNode | null = head;
 
-   while (fast.next && fast.next.next) {
-        slow = slow.next!;
+    while (fast && fast.next) {
+        slow = slow!.next;
         fast = fast.next.next;
     }
 
-    let stack = [];
-    let temp = slow.next || null;
-    while(temp != null) {
-        stack.push(temp);
-        temp = temp.next;
+    // 2. Reverse second half
+    let prev: ListNode | null = null;
+    let curr: ListNode | null = slow!.next;
+    slow!.next = null; // split the list
+
+    while (curr) {
+        const nextTemp = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = nextTemp;
     }
 
-    // 🧠 Disconnect first and second halves BEFORE merge (duplicated node appears here)
-    slow.next = null;
+    // 3. Merge two halves
+    let first: ListNode | null = head;
+    let second: ListNode | null = prev;
 
-    let curr = head;
+    while (second) {
+        const temp1 = first!.next;
+        const temp2 = second.next;
 
-    while(stack.length > 0) {
-        let next = curr.next;
-        const popEle = stack.pop();
-        curr.next = popEle;
-        popEle.next = next;
-        curr = next;
+        first!.next = second;
+        second.next = temp1;
+
+        first = temp1;
+        second = temp2;
     }
-};
+}

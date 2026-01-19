@@ -58,6 +58,21 @@ class LL {
         }
         this.head = prev;
     }
+
+    reverseList(head: ListNode | null): ListNode | null {
+    let prev: ListNode | null = null;
+    let curr: ListNode | null = head;
+
+    while (curr) {
+        const nextTemp = curr.next; // save next
+        curr.next = prev;           // reverse link
+        prev = curr;                // move prev
+        curr = nextTemp;            // move curr
+    }
+
+    return prev;
+}
+
 }
 
 const ll = new LL();
