@@ -1,4 +1,4 @@
-function nextGreaterElement(nums) {
+function nextGreaterElement(nums: number[]): number[] {
     let stack = []
     let result = []
 
