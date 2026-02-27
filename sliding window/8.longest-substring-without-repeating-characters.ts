@@ -17,33 +17,27 @@
     Output: 3
     Explanation: The answer is "wke", with the length of 3.
     Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
- */
-    // 👉 all unique character
-    function lengthOfLongestSubstring(s) {
-    
-};
-    
+ */ 
 
 // 🎲 👑 ------ slidig window and set -------
-function longestSubstringWithoutRepeating(str) {
-   let i = 0;
-   let j = 0;
-   let ans = 0;
-   let set = new Set();
+function longestSubstringWithoutRepeating(s: string): number {
+    let set = new Set<string>();
+    let i = 0;
+    let maxLen = 0;
 
-   while (j < str.length) {
-       // If the character is not in the set, add it and expand the window
-      if (!set.has(str[j])) {
-         set.add(str[j]);
-         ans = Math.max(ans, j - i + 1);
-         j++;
-      } else {
-         // If the character is in the set, remove the first character and shrink the window
-         set.delete(str[i])
-         i++;
-      }
-   }
-   return ans;
+    for (let j = 0; j < s.length; j++) {
+
+        // shrink window if duplicate found
+        while (set.has(s[j])) {
+            set.delete(s[i]);
+            i++;
+        }
+
+        set.add(s[j]);
+        maxLen = Math.max(maxLen, j - i + 1);
+    }
+
+    return maxLen;
 }
 const inputString = "abcabcbb";
 console.log(longestSubstringWithoutRepeating(inputString));

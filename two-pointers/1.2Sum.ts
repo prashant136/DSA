@@ -21,19 +21,8 @@
 
  */
 
-// ------------ brutte force -------------
-function twoSum(nums, target) {
-    for (let i = 0; i < nums.length; i++) {
-        for (let j = i + 1; j < nums.length; j++) {
-            if (nums[j] == target - nums[i]) {
-                return [i, j];
-            }
-        }
-    }
-}
-
 // -------------       --------------
-function twoSumII(arr, target) {
+function twoSum(arr: number[], target: number) {
     let map = new Map();
     // store elements and there index in the map
     for (let i = 0; i < arr.length; i++) {
@@ -51,5 +40,4 @@ function twoSumII(arr, target) {
 
 let arr = [3, 2, 4];
 let target = 6;
-// console.log(twoSum(arr, target));
-console.log(twoSumII(arr, target));
+console.log(twoSum(arr, target));

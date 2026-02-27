@@ -15,35 +15,31 @@
 // let k = 4
 // console.log(firstNegativeInteger(arr, k));
 
-
-// 👋 -------- using array deque --------
-function findNegative(nums, i, j) {
+function findNegative(nums: number[], i: number, j: number) {
     while (i <= j) {
         if (nums[i] < 0) return nums[i]
-        i += 1
+        i++;
     }
-    return 0
+    return 0    // else return 0
 }
-const firstNegativeIntegerSlidingWindow = (nums, k) => {
+
+const firstNegativeIntegerSlidingWindow = (nums: number[], k: number): number[] => {
     let i = 0;
-    let j = 0;
-    let ans = [];
-    while (j < nums.length) {
-        if (j - i + 1 < k) {
-            j += 1
-        }
-        else if (j - i + 1 == k) {
-            ans.push(findNegative(nums, i, j))
-            j++;
+    let result = [];
+
+    for (let j = 0; j < arr.length; j++) {
+        // window size is exceeding
+        if (j - i + 1 > k) {
             i++;
         }
-        // else {
-        //     i += 1
-        //     ans.push(findNegative(nums, i, j))
-        //     j += 1
-        // }
+
+        // if window size is eqaul
+        if (j - i + 1 === k) {
+            result.push(findNegative(nums, i, j));
+        }
     }
-    return ans
+
+    return result;
 }
 
 let arr = [12, -1, -7, 8, 15, 30, 16, -28];

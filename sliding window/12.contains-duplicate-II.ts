@@ -12,7 +12,7 @@ Output: false
 */
 
 // ✅  Using a Set with Sliding Window:
-function containsNearbyDuplicateSlidingWindow(nums, k) {
+function containsNearbyDuplicateSlidingWindow(nums: number[], k: number): boolean {
     // Create a Set to store unique elements within the sliding window
     const numSet = new Set();
 
@@ -40,21 +40,19 @@ function containsNearbyDuplicateSlidingWindow(nums, k) {
 }
 
 // ✅  Using a Hash Map: (easy)
-function containsNearbyDuplicateHashMap(nums, k) {
-    // Create an empty object to store the index of each element
-    const numMap = {};
+function containsNearbyDuplicateHashMap(nums: number[], k: number): boolean {
+    const map = new Map<number, number>();
 
-    // Loop through the array 'nums'
     for (let i = 0; i < nums.length; i++) {
-        // Check if the current element 'nums[i]' is a key in the 'numMap'
+        // Check if the current element 'nums[i]' is a key in the map
         // and if the difference between the current index 'i' and the stored index is less than or equal to 'k'
-        if (numMap.hasOwnProperty(nums[i]) && i - numMap[nums[i]] <= k) {
+        if (map.has(nums[i]) && Math.abs(i - map.get(nums[i])!) <= k) {
             // If yes, there is a duplicate within the specified distance 'k'
             return true;
         }
 
-        // Store the current index 'i' as the value for the key 'nums[i]' in the 'numMap'
-        numMap[nums[i]] = i;
+        // Store the current index 'i' as the value for the key 'nums[i]' in map.
+        map.set(nums[i], i);
     }
 
     // If the loop completes without finding any duplicates, return false
