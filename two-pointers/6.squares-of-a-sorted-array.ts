@@ -31,30 +31,23 @@
 */
 
 function sortedSquares(nums: number[]): number[] {
-    const n = nums.length;
-    const res: number[] = new Array(n);
-
     let left = 0;
-    let right = n - 1;
-    let idx = n - 1;
+    let right = nums.length - 1;
+    let result = new Array(nums.length);
+    let index = nums.length - 1;
 
     while (left <= right) {
-        const leftSq = nums[left] * nums[left];
-        const rightSq = nums[right] * nums[right];
-
-        if (leftSq > rightSq) {
-            res[idx] = leftSq;
+        if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+            result[index--] = nums[left] * nums[left];
             left++;
         } else {
-            res[idx] = rightSq;
+            result[index--] = nums[right] * nums[right];
             right--;
         }
-        idx--;
     }
 
-    return res;
+    return result;
 }
-
 
 /*
     🔍 Dry Run

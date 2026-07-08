@@ -9,8 +9,7 @@
         A heap is always a complete binary tree.
 
         Meaning:
-            All levels are filled except possibly the last
-            Last level is filled from left to right
+            All levels are filled except possibly the last level is filled from left to right
 
             10
            /   \

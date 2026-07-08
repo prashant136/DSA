@@ -17,6 +17,39 @@
     👋 Follow up: Your algorithm's time complexity must be better than O(n log n), where n is the array's size.
  */
 
+// brute force approch - 
+// 1️⃣ Count frequency of each number
+// 2️⃣ Sort elements based on frequency
+// 3️⃣ Pick top k elements
+function topKFrequent__bruteForce(nums: number[], k: number): number[] {
+
+    // Step 1: Frequency map
+    const freq = new Map<number, number>();
+
+    for (let num of nums) {
+        freq.set(num, (freq.get(num) || 0) + 1);
+    }
+
+    // Step 2: Convert map to array
+    const arr: [number, number][] = [];
+
+    for (let [num, count] of freq) {
+        arr.push([num, count]);
+    }
+
+    // Step 3: Sort by frequency (descending)
+    arr.sort((a, b) => b[1] - a[1]);
+
+    // Step 4: Take first k elements
+    const result: number[] = [];
+
+    for (let i = 0; i < k; i++) {
+        result.push(arr[i][0]);
+    }
+
+    return result;
+}
+
 function topKFrequent(nums: number[], k: number): number[] {
     const hashmap = new Map<number, number>();
     for (let ele of nums) {
